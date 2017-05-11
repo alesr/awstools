@@ -1,7 +1,7 @@
 import os
 import sh
 import json
-import ConfigParser
+import configparser
 
 
 def read_config(profile="default"):
@@ -13,13 +13,13 @@ def read_config(profile="default"):
     """
     awsid = sh.aws("sts", "get-caller-identity", "--output", "text", "--query", "Account").strip()
 
-    config = ConfigParser.RawConfigParser()
+    config = configparser.RawConfigParser()
 
     try:
         config.read('%s/.aws/config' % os.environ['HOME'])
         region = config.get(profile, 'region')
     except:
-        print "Error reading the '~/.aws/config' file."
+        print("Error reading the '~/.aws/config' file.")
         raise
 
         # check if the user has defined his credentials
@@ -28,7 +28,7 @@ def read_config(profile="default"):
         key = config.get(profile, 'aws_access_key_id')
         secret = config.get(profile, 'aws_secret_access_key')
     except:
-        print "Error reading the '~/.aws/credentials' file."
+        print("Error reading the '~/.aws/credentials' file.")
         raise
     return awsid, region, key, secret
 
