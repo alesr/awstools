@@ -219,7 +219,7 @@ def describe_policy(policy):
     :param name: policy name
     :return: dictionary with the policy properties
     """
-    return get_policy_by_name(policy['policyName'])
+    return describe_policy_by_name(policy['policyName'])
 
 
 def describe_policy_by_name(name):
